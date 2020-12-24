@@ -6,7 +6,7 @@ public class TestJunit {
 
    @Test
    public void testCglOne() {
-	   int l[][]= {{1,2},{2,6},{4,5},{6,3}};
+	   int l[][]= {{6,8},{8,6},{2,4},{5,7}};
 	   Board b=new Board();
        System.out.println("======TEST ONE EXECUTED=======");
        Assertions.assertEquals(null,b.createBoard(-10,l));
@@ -20,11 +20,52 @@ public class TestJunit {
        Assertions.assertEquals(null,b.createBoard(0,l));
    }
    
-  /* @Test
+   @Test
    public void testCglThree() {
+	   int l[][]= {{1,2},{1,3},{2,4},{3,2},{3,1},{1,4},{5,6},{5,5}};
+	   Board b=new Board();
 	   ConwaysGameOfLife cgl=new ConwaysGameOfLife();
-	   cgl.generateNextGeneration(cgl.createBoard(m));
+	   
+	   System.out.println("======TEST TWO EXECUTED=======");
+       Assertions.assertEquals("...**.....\n"
+       		+ "..***.....\n"
+       		+ "...**.....\n"
+       		+ "..........\n"
+       		+ "..........\n"
+       		+ "..........\n"
+       		+ "..........\n"
+       		+ "..........\n"
+       		+ "..........\n"
+       		+ "..........\n",b.printBoard(ConwaysGameOfLife.generateNextGeneration(2,b.createBoard(10,l))));
+   }
+   
+   
+   @Test
+   public void testCglFour() {
+	   int l[][]= {{6,8},{8,6},{2,4},{5,7}};
+	   Board b=new Board();
+	   //ConwaysGameOfLife cgl=new ConwaysGameOfLife(); 
+	   //cgl.generateNextGeneration(b.createBoard(10,l));
 	   System.out.println("======TEST THREE EXECUTED=======");
-	   Assertions.assertEquals("Next Generation created successfully",cgl.generateNextGeneration());
-   }*/
+	   Assertions.assertEquals("..........\n"
+	   		+ "..........\n"
+	   		+ "....*.....\n"
+	   		+ "..........\n"
+	   		+ "..........\n"
+	   		+ ".......*..\n"
+	   		+ "........*.\n"
+	   		+ "..........\n"
+	   		+ "......*...\n"
+	   		+ "..........\n",b.printBoard(b.createBoard(10,l)));
+	   
+	   
+   }
+   @Test
+   public void testCglFive() {
+	   int l[][]= {{6,8},{8,6},{2,4},{5,7}};
+	   Board b=new Board();
+	   Cell c=new Cell();
+	   System.out.println("-----Four----");
+	   Assertions.assertEquals(true,c.getStatus(b.createBoard(10, l), 2,4));
+   }
 }

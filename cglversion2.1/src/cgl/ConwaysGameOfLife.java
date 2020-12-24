@@ -3,12 +3,10 @@ package cgl;
 //import java.util.Scanner;
 
 public class ConwaysGameOfLife {
-	public void generateNextGeneration()
+	
+	public static boolean[][] generateNextGeneration(int noofgenerations,boolean [][] current)
 	{
-		
-	}
-	public static boolean[][] generateNextGeneration(boolean [][] current)
-	{
+		Board  b=new Board();
 		int n=current.length,i,j;
 		boolean[][] newBoard = new boolean[n][n];
 		Cell c=new Cell();
@@ -37,21 +35,34 @@ public class ConwaysGameOfLife {
                 else{
                     if(ilives==3)
                     {
-                        newBoard[i][j] = true;
+                        newBoard[i][j] = true; 
                     }
                 }
                 
                 
             }
         }
+		//System.out.println(b.printBoard(newBoard));
+		while(noofgenerations>1) 
+		{
+			
+			newBoard=generateNextGeneration(1,newBoard);
+			//System.out.println(b.printBoard(newBoard));
+			noofgenerations--;
+		}
 		return newBoard;
 	}
 		
 		public static void main(String[] args)
 		{
-			int l[][]= {{1,2},{2,6},{4,5},{6,3}};
+			/*int l[][]= {{1,2},{1,3},{2,4},{3,2},{3,1},{1,4},{5,6},{5,5}};
 			Board b=new Board();
-			b.createBoard(10,l);
+			generateNextGeneration(3,b.createBoard(10, l));
+			//b.createBoard(10,l);
+			*/
+			int l[][]= {{6,8},{8,6},{2,4},{5,7}};
+			Board b=new Board();
+			System.out.println(b.printBoard(b.createBoard(10,l)));
 		}
 	}
 	

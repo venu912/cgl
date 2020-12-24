@@ -23,23 +23,33 @@ public class Board {
 		
 		 
 	}
-	public void printBoard(boolean board[][])
+	public String printBoard(boolean board[][]) 
 	{
-		for(int i=0;i<board.length;i++)
+		StringBuffer a = new StringBuffer();
+        for(int i=0;i<board.length;i++)
         {
-            for(int j=0;j<board.length;j++)
+            for(int j=0;j<board[i].length;j++)
             {
-                if(board[i][j]==false)
+                if(board[i][j])
                 {
-                	System.out.print(".");
+                    a.append("*");
+                    //System.out.print(".");
+                    //System.out.print(" ");
                 }
                 else
                 {
-                	System.out.print("*");
+                    a.append(".");
+                    //System.out.print("*");
+                    //System.out.print(" ");
                 }
+                //if(j<board[0].length-1)
+                //{
+                  //  System.out.print(" ");
+                //}
             }
-            System.out.println();
-		
-	}
+            a.append("\n");
+            //System.out.println();
+        }
+       return a.toString();
 	}
 }

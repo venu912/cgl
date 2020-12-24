@@ -10,9 +10,8 @@ public class Cell
 		}
 		return false;
 	}
-	public int countLiveCells(boolean[][] current,int x,int y)
+	public int countLiveCells(boolean[][] current,int x,int y)  
     {
-        //int n = current.length,i,j;
 		int i,j;
         int lives=0;
         for(i=x-1;i<=x+1;i++)
