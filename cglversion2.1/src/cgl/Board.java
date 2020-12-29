@@ -1,16 +1,19 @@
 package cgl;
 
 public class Board {
+	
+	//creatBoard is used to create a board with size of n and with liveCells 
+	//Returns a boolean value
 	public boolean[][] createBoard(int n,int liveCells[][])
 	{
 		if(n>0)
 		{
-			boolean gameBoard[][]=new boolean[n][n];
-			for(int i=0;i<liveCells.length;i++)
+			boolean gameBoard[][]=new boolean[n][n]; 
+			for(int i=0;i<liveCells.length;i++) 
 	        {
 	            int l=liveCells[i][0];
 	            int m=liveCells[i][1];
-	            gameBoard[l][m]=true;
+	            gameBoard[l][m]=true; 
 	        }
 			return gameBoard;
 		}
@@ -18,17 +21,16 @@ public class Board {
 		{
 			return null;
 		}
-		
-		
-		
-		 
+			 
 	}
+	
+	
 	public String printBoard(boolean board[][]) 
 	{
-		StringBuffer a = new StringBuffer();
+		StringBuffer a = new StringBuffer();  //creates an empty string
         for(int i=0;i<board.length;i++)
         {
-            for(int j=0;j<board[i].length;j++)
+            for(int j=0;j<board[i].length;j++) 
             {
                 if(board[i][j])
                 {
