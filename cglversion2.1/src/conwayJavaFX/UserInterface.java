@@ -2,14 +2,18 @@ package conwayJavaFX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
+import cgl.Board;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -77,10 +81,10 @@ public class UserInterface {
 	// These attributes define the Board used by the simulation and the graphical representation
 	// There are two Boards. The previous Board and the new Board.  Once the new Board has been
 	// displayed, it becomes the previous Board for the generation of the next new Board.
-	//private Board oddGameBoard = new Board();		// The Board for odd frames of the animation
+	private Board oddGameBoard = new Board();		// The Board for odd frames of the animation
 	private Pane oddCanvas = new Pane();			// Pane that holds its graphical representation
 	
-	//private Board evenGameBoard =  new Board();	// The Board for even frames of the animation
+	private Board evenGameBoard =  new Board();	// The Board for even frames of the animation
 	private Pane evenCanvas = new Pane();			// Pane that holds its graphical representation
 
 	private boolean toggle = true;					// A two-state attribute that specifies which
@@ -265,7 +269,24 @@ public class UserInterface {
 	 * board for the simulation.
 	 */
 	private void loadImageData() {
-		try {
+		try (Scanner scn = new Scanner(new File(str_FileName)))
+		{
+			ArrayList<Integer> lst=new ArrayList<Integer>();
+		while(scn.hasNext())
+		{
+			lst.add(scn.nextInt());
+			
+		}
+		int sze=lst.size()/2;
+		int ls[][]=new int[sze][2];
+		int i=0;
+		for(int j=0;j<sze;j++)
+		{
+			ls[j][0]=lst.get(i++);
+			ls[j][1]=lst.get(i++);
+		}
+		System.out.println(Arrays.deepToString(ls));
+		pop_can(oddCanvas,ls);
 			// Your code goes here......
 			
 		}
@@ -307,6 +328,36 @@ public class UserInterface {
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
 		
 		// Your code goes here...
+		
+		evenGameBoard= oddGameBoard;
+		window.getChildren().remove(oddCanvas);
+		if(toggle) {
+			oddCanvas.getChildren().clear();
+				window.getChildren().remove(oddCanvas);
+				//oddGameBoard.generateNextge
+				pop_can(evenCanvas,null);
+				toggle=false;
+		}
+		else {
+			evenCanvas.getChildren().clear();
+			window.getChildren().remove(evenCanvas);
+			pop_can(oddCanvas,null);
+			toggle=true;
+		}
+				
+	}
+	public void pop_can(Pane s, int[][] l) {
+		boolean[][] x=oddGameBoard.createBoard(100,l);
+		int cnt=0;
+		for(int i=0;i<x.length;i++) {
+			for(int j=0;j<x.length;j++) {
+				if(x[i][j]) {
+					Rectangle rect=new Rectangle(10,10,Color.BLACK);
+					rect.relocate(8*i, 8*j);
+					s.getChildren().add(rect);
+				}
+			}
+		}
 	}
 
 	/**********
